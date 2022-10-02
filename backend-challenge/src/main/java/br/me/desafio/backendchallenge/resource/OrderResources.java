@@ -1,4 +1,4 @@
-package br.me.desafio.backendchallenge.services.resource;
+package br.me.desafio.backendchallenge.resource;
 
 import br.me.desafio.backendchallenge.entities.Order;
 import br.me.desafio.backendchallenge.services.OrderService;

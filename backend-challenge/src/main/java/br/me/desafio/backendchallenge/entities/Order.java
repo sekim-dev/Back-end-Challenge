@@ -15,7 +15,7 @@ import java.util.Set;
 public class Order implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long orderId;
+    private Long id;
     private int intensAprovados;
     private int valorAprovado;
     @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd'T'HH:mm:ss'Z'", timezone = "GMT")
@@ -26,15 +26,15 @@ public class Order implements Serializable {
     @JoinColumn(name = "client_id")
     private User client;
 
-    @OneToMany(mappedBy = "order")      //Set (interface) representa um conjunto != de List. impede repetir o mesmo item.
+    @OneToMany(mappedBy = "order") //, cascade = CascadeType.ALL, orphanRemoval = true)      //Set (interface) representa um conjunto != de List. impede repetir o mesmo item.
     private Set<Item> items = new HashSet<>();
 
 
     public Order() {
     }
 
-    public Order(Long orderId, int intensAprovados, int valorAprovado, Instant moment, OrderStatus orderStatus, User client) {
-        this.orderId = orderId;
+    public Order(Long id, int intensAprovados, int valorAprovado, Instant moment, OrderStatus orderStatus, User client) {
+        this.id = id;
         this.intensAprovados = intensAprovados;
         this.valorAprovado = valorAprovado;
         this.moment = moment;
@@ -43,13 +43,13 @@ public class Order implements Serializable {
     }
 
 
-    public Long getOrderId() {
+    public Long getId() {
 
-        return orderId;
+        return id;
     }
 
-    public void setOrderId(Long orderId) {
-        this.orderId = orderId;
+    public void setId(Long id) {
+        this.id = id;
     }
 
     public int getIntensAprovados() {
@@ -94,7 +94,7 @@ public class Order implements Serializable {
         this.client = client;
     }
 
-    public Set<Item> getItenms() {
+    public Set<Item> getItems() {
         return items;
     }
 
