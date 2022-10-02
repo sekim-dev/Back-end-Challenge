@@ -1,5 +1,7 @@
 package br.me.desafio.backendchallenge.entities;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import javax.persistence.*;
 import java.io.Serializable;
 import java.util.HashSet;
@@ -12,32 +14,34 @@ public class Item implements Serializable {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
+    private Long ItemId;
 
     private String descricao;
     private Double precoUnitario;
     private Integer quantidade;
-    @Transient
-    private Set<Order> orders = new HashSet<>();
 
-    // private Set<Product> products = new HashSet<>();
+    @JsonIgnore
+    @ManyToOne
+    @JoinColumn(name = "order_id")
+    private Order order;
 
     public Item() {
     }
 
-    public Item(Long id, String descricao, Double precoUnitario, Integer quantidade) {
-        this.id = id;
+    public Item(Long ItemId, String descricao, Double precoUnitario, Integer quantidade, Order order) {
+        this.ItemId = ItemId;
         this.descricao = descricao;
         this.precoUnitario = precoUnitario;
         this.quantidade = quantidade;
+        this.order = order;
     }
 
-    public Long getId() {
-        return id;
+    public Long getItemId() {
+        return ItemId;
     }
 
-    public void setId(Long id) {
-        this.id = id;
+    public void setItemId(Long ItemId) {
+        this.ItemId = ItemId;
     }
 
     public String getDescricao() {
@@ -64,9 +68,7 @@ public class Item implements Serializable {
         this.quantidade = quantidade;
     }
 
-    public Set<Order> getOrders() {
-        return orders;
-    }
+
 
     @Override
     public boolean equals(Object o) {
@@ -82,44 +84,4 @@ public class Item implements Serializable {
     }
 }
 
-
-
-
-    /*    public Category(Long id, String name) {
-        this.id = id;
-        this.name = name;
-    }
-
-    public Long getId() {
-        return id;
-    }
-
-    public void setId(Long id) {
-        this.id = id;
-    }
-
-    public String getName() {
-        return name;
-    }
-
-    public void setName(String name) {
-        this.name = name;
-    }
-
-    public Set<Order> getOrders() {
-        return orders;
-    }
-
-    @Override
-    public boolean equals(Object o) {
-        if (this == o) return true;
-        if (!(o instanceof Category)) return false;
-        Category category = (Category) o;
-        return getId().equals(category.getId());
-    }
-
-    @Override
-    public int hashCode() {
-        return Objects.hash(getId());
-    }*/
 

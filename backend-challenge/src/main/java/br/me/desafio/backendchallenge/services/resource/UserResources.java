@@ -1,7 +1,8 @@
-package br.me.desafio.backendchallenge.resource;
+package br.me.desafio.backendchallenge.services.resource;
 
-import br.me.desafio.backendchallenge.entities.Order;
-import br.me.desafio.backendchallenge.services.OrderService;
+import br.me.desafio.backendchallenge.entities.User;
+import br.me.desafio.backendchallenge.services.UserService;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -13,22 +14,20 @@ import java.util.List;
 
 
 @RestController
-@RequestMapping(value = "/orders")
-public class OrderResources {
+@RequestMapping(value = "/users")
+public class UserResources {
     @Autowired
-    private OrderService service;
+    private UserService service;
 
     @GetMapping
-    public ResponseEntity<List<Order>> findAll() {
-        List<Order> list = service.findAll();
+    public ResponseEntity<List<User>> findAll() {
+        List<User> list = service.findAll();
         return ResponseEntity.ok().body(list);
     }
 
     @GetMapping(value = "/{id}")
-    public ResponseEntity<Order> findById(@PathVariable Long id) {
-        Order obj = service.findById(id);
+    public ResponseEntity<User> findById(@PathVariable Long id) {
+        User obj = service.findById(id);
         return ResponseEntity.ok().body(obj);
     }
-
-
 }

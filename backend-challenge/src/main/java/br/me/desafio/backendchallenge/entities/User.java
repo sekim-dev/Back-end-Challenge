@@ -1,7 +1,5 @@
 package br.me.desafio.backendchallenge.entities;
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
-
 import javax.persistence.*;
 import java.io.Serializable;
 import java.util.*;
@@ -10,15 +8,14 @@ import java.util.*;
 @Table(name = "tb_users")
 public class User implements Serializable {
 
-    //private static final long serialVersionUID = 1L;
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
+    private Long userId;
     private String name;
     private String email;
     private String phone;
     private String password;
-    @JsonIgnore
+
     @OneToMany(mappedBy = "client")
     private List<Order> orders = new ArrayList<>();
 
@@ -26,20 +23,20 @@ public class User implements Serializable {
     public User() {
     }
 
-    public User(Long id, String name, String email, String phone, String password) {
-        this.id = id;
+    public User(Long userId, String name, String email, String phone, String password) {
+        this.userId = userId;
         this.name = name;
         this.email = email;
         this.phone = phone;
         this.password = password;
     }
 
-    public Long getId() {
-        return id;
+    public Long getUserId() {
+        return userId;
     }
 
-    public void setId(Long id) {
-        this.id = id;
+    public void setUserId(Long userId) {
+        this.userId = userId;
     }
 
     public String getName() {
@@ -84,12 +81,12 @@ public class User implements Serializable {
         if (this == o) return true;
         if (!(o instanceof User)) return false;
         User user = (User) o;
-        return Objects.equals(getId(), user.getId());
+        return Objects.equals(getUserId(), user.getUserId());
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(getId());
+        return Objects.hash(getUserId());
     }
 
 
