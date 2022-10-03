@@ -40,10 +40,10 @@ public class TestConfig implements CommandLineRunner {
         User u2 =new User(null,"Amanda","Amanda@me.com.br","222222222","67890");
         User u3 =new User(null,"Hugo","Hugo@me.com.br","33333333","24680");
 
-        Order o1 = new Order(null,0,0, Instant.parse("2019-06-20T19:53:07Z"), OrderStatus.APROVADO, u1);
-        Order o2 = new Order(null,0,0, Instant.parse("2019-07-21T03:42:10Z"), OrderStatus.REPROVADO, u2);
-        Order o3 = new Order(null,0,0, Instant.parse("2019-07-22T15:21:22Z"), OrderStatus.CODIGO_PEDIDO_INVALIDO, u3);
-        Order o4 = new Order(null,0,0, Instant.parse("2019-06-20T19:53:07Z"), OrderStatus.APROVADO, u1);
+        Order o1 = new Order(null,null,0,0, Instant.parse("2019-06-20T19:53:07Z"), OrderStatus.APROVADO, u1);
+        Order o2 = new Order(null,null,0,0, Instant.parse("2019-07-21T03:42:10Z"), OrderStatus.REPROVADO, u2);
+        Order o3 = new Order(null,null,0,0, Instant.parse("2019-07-22T15:21:22Z"), OrderStatus.CODIGO_PEDIDO_INVALIDO, u3);
+        Order o4 = new Order(null,null,0,0, Instant.parse("2019-06-20T19:53:07Z"), OrderStatus.APROVADO, u1);
 
         Item item1 = new Item(null, "iten_A", 10.00, 5,o1);
         Item item2 = new Item(null, "iten_B", 11.00, 6,o1);
@@ -53,7 +53,7 @@ public class TestConfig implements CommandLineRunner {
         Item item6 = new Item(null, "iten_A", 15.00, 10,o2);
         Item item7 = new Item(null, "iten_B", 16.00, 11,o2);
         Item item8 = new Item(null, "iten_A", 17.00, 12,o3);
-        Item item9 = new Item(null, "iten_A", 18.00, 12,o4);
+        Item item9 = new Item(null, "iten_A", 18.00, 12, o4);
 
 
         userRepository.saveAll(Arrays.asList(u1,u2,u3));

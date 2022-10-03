@@ -16,7 +16,7 @@ public class User implements Serializable {
     private String phone;
     private String password;
 
-    @OneToMany(mappedBy = "client")
+    @OneToMany(mappedBy = "client", cascade = CascadeType.ALL, orphanRemoval = true)
     private List<Order> orders = new ArrayList<>();
 
     //construtor vazio devido à utilização da framework.

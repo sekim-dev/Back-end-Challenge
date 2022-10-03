@@ -12,16 +12,16 @@ import java.util.Set;
 
 @Entity
 @Table(name = "tb_order")
-public class Order implements Serializable {
+public class Status implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     private Long pedido;
-/*    private int intensAprovados;
+    private int intensAprovados;
     private int valorAprovado;
     @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd'T'HH:mm:ss'Z'", timezone = "GMT")
     private Instant moment;
-    private String orderStatus;*/
+    private String orderStatus;
     @JsonIgnore
     @ManyToOne
     @JoinColumn(name = "client_id")
@@ -30,16 +30,16 @@ public class Order implements Serializable {
     @OneToMany(mappedBy = "order", cascade = CascadeType.ALL, orphanRemoval = true)
     private Set<Item> items = new HashSet<>();   //Set (interface) representa um conjunto != de List. impede repetir o mesmo item.
 
-    public Order() {
+    public Status() {
     }
 
-    public Order(Long id, Long pedido, int intensAprovados, int valorAprovado, Instant moment, OrderStatus orderStatus, User client) {
+    public Status(Long id, Long pedido, int intensAprovados, int valorAprovado, Instant moment, OrderStatus orderStatus, User client) {
         this.id = id;
         this.pedido = pedido;
-/*        this.intensAprovados = intensAprovados;
+        this.intensAprovados = intensAprovados;
         this.valorAprovado = valorAprovado;
         this.moment = moment;
-        setOrderStatus(orderStatus);*/
+        setOrderStatus(orderStatus);
         this.client = client;
     }
 
@@ -61,7 +61,6 @@ public class Order implements Serializable {
         this.pedido = pedido;
     }
 
-/*
     public int getIntensAprovados() {
         return intensAprovados;
     }
@@ -95,7 +94,6 @@ public class Order implements Serializable {
             this.orderStatus = orderStatus.getOrderStatus();
         }
     }
-*/
 
     public User getClient() {
         return client;
