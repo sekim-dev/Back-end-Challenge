@@ -22,23 +22,5 @@ public enum OrderStatus {
         this.orderStatus = orderStatus;
     }
 
-    /*private String  code;
 
-    private OrderStatus(String code){
-        this.code = code;
-    }
-
-    public String getCode(){
-        return code;
-    }
-*/
-/*    public static OrderStatus valueOf(String code){
-        for (OrderStatus value : OrderStatus.values()){
-            if (code == value.getCode()){
-                return value;
-
-            }
-        }
-        throw new IllegalArgumentException("Invalid OrderStatus code");
-    }*/
 }

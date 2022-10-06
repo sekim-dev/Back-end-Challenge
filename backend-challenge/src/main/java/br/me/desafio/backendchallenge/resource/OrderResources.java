@@ -1,9 +1,11 @@
 package br.me.desafio.backendchallenge.resource;
 
+import br.me.desafio.backendchallenge.dto.OrderDto;
 import br.me.desafio.backendchallenge.entities.Order;
 import br.me.desafio.backendchallenge.services.OrderService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
+import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
@@ -24,28 +26,28 @@ public class OrderResources {
     }
 
     @GetMapping(value = "/{id}")
-    public ResponseEntity<Order> findById(@PathVariable Long id) {
+    public ResponseEntity<Order> findById(@PathVariable String id) {
         Order obj = service.findById(id);
         return ResponseEntity.ok().body(obj);
     }
 
     @PostMapping
-    public ResponseEntity<Order> insert(@RequestBody Order obj) {
-        obj = service.insert(obj);
+    public ResponseEntity<Order> insert( @RequestBody OrderDto dto) {
+        Order obj = service.insert(dto);
         URI uri = ServletUriComponentsBuilder.fromCurrentRequest().path("/{id}").buildAndExpand(obj.getId()).toUri();
         return ResponseEntity.created(uri).body(obj);
     }
 
     @DeleteMapping(value = "/{id}")
-    public ResponseEntity<Void> delete(@PathVariable Long id) {
+    public ResponseEntity<Void> delete(@PathVariable String id) {
         service.delete(id);
         return ResponseEntity.noContent().build();
     }
 
     @PutMapping(value = "/{id}")
-    public ResponseEntity<Order> update(@PathVariable Long id,@RequestBody Order obj) {
-        obj = service.update(id, obj);
-        return ResponseEntity.ok().body(obj);
+    public ResponseEntity<Order> update(@PathVariable String id, @RequestBody OrderDto obj) {
+        Order order = service.update(id, obj);
+        return ResponseEntity.ok().body(order);
     }
 
 }

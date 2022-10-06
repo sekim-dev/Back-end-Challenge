@@ -1,51 +1,74 @@
 package br.me.desafio.backendchallenge.entities;
 
-import br.me.desafio.backendchallenge.entities.enuns.OrderStatus;
-import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
 import javax.persistence.*;
 import java.io.Serializable;
-import java.util.*;
+import java.util.HashSet;
+import java.util.Objects;
+import java.util.Set;
 
 @Entity
 @Table(name = "tb_order")
 public class Order implements Serializable {
     private static final long serialVersionUID = 1L;
     @Id
-    private Long id;
-
+    @JsonProperty("pedido")
+    private String id;
 
     @OneToMany(mappedBy = "order", cascade = CascadeType.ALL, orphanRemoval = true)
-    private List<Item> items = new ArrayList<>();  //Set (interface) representa um conjunto != de List. impede repetir o mesmo item.
+    @JsonProperty("Itens")
+    private Set<Item> items = new HashSet<>();  //Set (interface) representa um conjunto != de List. impede repetir o mesmo item.
 
-    public Order() {
+//    @OneToOne(mappedBy = "order", cascade = CascadeType.ALL, orphanRemoval = true)
+//    @JsonProperty("Status")
+//    private Status status;
+
+    public Order(String id) {
+        this.id = id;
     }
 
-    public Order(Long id, List<Item> items) {
+    public Order(String id, Set<Item> items) {
         this.id = id;
         this.items = items;
     }
 
-    public Long getId() {
+    public Order() {
+
+    }
+
+    public String getId() {
         return id;
     }
 
-    public void setId(Long id) {
+    public void setId(String id) {
         this.id = id;
     }
 
-    public List<Item> getItems() {
-        return items;
+    public void addItem(Item item) {
+        items.add(item);
     }
 
-    public void setItems(List<Item> items) {
+    public void removeItem(Order item) {
+        items.remove(item);
+    }
+
+    public void setItems(Set<Item> items) {
         this.items = items;
     }
 
-    public void ListItems(List<Item> items) {
+    public void ListItems(Set<Item> items) {
         this.items = items;
     }
+
+    public double valorTotal() {
+        double sum = 0.0;
+        for (Item i : items) {
+            sum += i.getSubtotal();
+        }
+        return sum;
+    }
+
 
     @Override
     public boolean equals(Object o) {
@@ -60,3 +83,5 @@ public class Order implements Serializable {
         return Objects.hash(getId());
     }
 }
+
+

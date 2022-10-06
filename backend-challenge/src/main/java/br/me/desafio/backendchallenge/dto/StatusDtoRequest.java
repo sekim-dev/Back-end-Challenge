@@ -1,16 +1,23 @@
 package br.me.desafio.backendchallenge.dto;
 
-import br.me.desafio.backendchallenge.entities.Status;
+import br.me.desafio.backendchallenge.entities.enuns.OrderStatus;
+import com.fasterxml.jackson.annotation.JsonProperty;
 
 public class StatusDtoRequest {
-    private Status status;
+    private OrderStatus status;
     private int itensAprovados;
     private double valorAprovado;
-    private String order;
+    @JsonProperty("pedido")
+    private String id;
 
+    public StatusDtoRequest(OrderStatus status, int itensAprovados, double valorAprovado, String id) {
+        this.status = status;
+        this.itensAprovados = itensAprovados;
+        this.valorAprovado = valorAprovado;
+        this.id = id;
+    }
 
-
-    public Status getStatus() {
+    public OrderStatus getStatus() {
         return status;
     }
 
@@ -22,7 +29,7 @@ public class StatusDtoRequest {
         return valorAprovado;
     }
 
-    public String getOrder() {
-        return order;
+    public String getId() {
+        return id;
     }
 }

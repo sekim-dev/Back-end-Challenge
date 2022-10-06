@@ -1,16 +1,15 @@
 package br.me.desafio.backendchallenge.services;
 
 
+import br.me.desafio.backendchallenge.dto.ItemDto;
+import br.me.desafio.backendchallenge.dto.OrderDto;
 import br.me.desafio.backendchallenge.entities.Item;
 import br.me.desafio.backendchallenge.entities.Order;
 
 import br.me.desafio.backendchallenge.repositories.OrderRepository;
-import br.me.desafio.backendchallenge.services.exceptions.ResourceNotFoundException;
-import org.hibernate.service.spi.ServiceException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
@@ -23,38 +22,38 @@ public class OrderService {
         return repository.findAll();
     }
 
-    public Order findById(Long id){
+    public Order findById(String id){
        Optional<Order> obj = repository.findById(id);
        return obj.get();
     }
-    public Order insert(Order obj){
-
-        return repository.save(obj);
+    public Order insert(OrderDto dto){
+        Order order = new Order(dto.getId());
+        order = this.addItemsToOrder(order, dto.getItem());
+        repository.save(order);
+        return order;
     }
 
-    public void delete(Long id){
+    public void delete(String id){
         repository.deleteById(id);
     }
-    public Order update(Long id,Order obj){
-        Order entity = repository.getReferenceById(id);
-        updateData(entity, obj);
-        return  repository.save(entity);
+
+    public Order update(String id, OrderDto dto){
+        Order order = repository.getReferenceById(id);
+        //updateData(order, dto);
+        order = this.addItemsToOrder(order, dto.getItems());
+        return  repository.save(order);
     }
 
-    private void updateData(Order entity, Order obj) {
-        entity.setId(obj.getId());
-    }
-
-/*    private void associaItemPedido(Order order) {
-        List<Item> items = order.getItems();
-        if (items == null || items.isEmpty()) {
-        throw new ServiceException("Lista de itens vazia");
-    }
-        order.setItems(new ArrayList<>());
-        for (Item item: items) {
-            validation(item);
+//    private void updateData(Order entity, Order obj) {
+//        entity.setId(obj.getId());
+//    }
+    public Order addItemsToOrder (Order order, List<ItemDto> dto) {
+        order.removeItem(order);
+        for (ItemDto i : dto) {
+            Item item = new Item(null, i.getDescricao(), i.getPrecoUnitario(), i.getQuantidade(), order);
             order.addItem(item);
         }
+        return order;
+    }
 
-    }*/
 }

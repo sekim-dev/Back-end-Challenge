@@ -19,8 +19,6 @@ import java.util.*;
 @Profile("test")
 public class TestConfig implements CommandLineRunner {
 
-    /*    @Autowired
-        private UserRepository userRepository;*/
     @Autowired
     private OrderRepository orderRepository;
     @Autowired
@@ -38,12 +36,14 @@ public class TestConfig implements CommandLineRunner {
 
 
 
-        List<Item> teste = new ArrayList<>();
+        Set<Item> teste = new HashSet<>();
+        List<Item> statks = new ArrayList<>();
 
-        Order o1 = new Order(1L, teste);
-        Order o2 = new Order(2L, teste);
-        Order o3 = new Order(3L, teste);
-        Order o4 = new Order(4L, teste);
+
+        Order o1 = new Order("1", teste);
+        Order o2 = new Order("2", teste);
+        Order o3 = new Order("3", teste);
+        Order o4 = new Order("4", teste);
 
         Status s1 = new Status(null, 2, 1, OrderStatus.APROVADO);
         Status s2 = new Status(null, 3, 2, OrderStatus.APROVADO);

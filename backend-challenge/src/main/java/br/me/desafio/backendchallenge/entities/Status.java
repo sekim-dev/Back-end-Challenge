@@ -3,6 +3,7 @@ package br.me.desafio.backendchallenge.entities;
 
 
 import br.me.desafio.backendchallenge.entities.enuns.OrderStatus;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 
 import javax.persistence.*;
 import java.io.Serializable;
@@ -19,20 +20,21 @@ public class Status implements Serializable {
     private Long id;
     private int itensAprovados;
     private double valorAprovado;
-    private OrderStatus mainStatus;
+    private OrderStatus Status;
 
-    @ManyToOne
+    @JsonIgnore
+    @OneToOne
     @JoinColumn(name = "order_id")
     private Order order;
 
-//    private List<OrderStatus> statusList = new ArrayList<>();
+    //private List<OrderStatus> statusList;
 
-    public Status(Long id, int itensAprovados, double valorAprovado, OrderStatus mainStatus) {
+    public Status(Long id, int itensAprovados, double valorAprovado, OrderStatus status) {
         this.id = id;
-//        this.order = order;
+        this.order = order;
         this.itensAprovados = itensAprovados;
         this.valorAprovado = valorAprovado;
-        this.mainStatus = mainStatus;
+        this.Status = status;
 
     }
 
@@ -63,29 +65,13 @@ public class Status implements Serializable {
         this.valorAprovado = valorAprovado;
     }
 
-    public OrderStatus getMainStatus() {
-        return mainStatus;
+    public OrderStatus getStatus() {
+        return Status;
     }
 
-    public void setMainStatus(OrderStatus orderStatus) {
-        this.mainStatus = orderStatus;
+    public void setStatus(OrderStatus orderStatus) {
+        this.Status = orderStatus;
     }
-
-//    public Order getOrder() {
-//        return order;
-//    }
-//
-//    public void setOrder(Order order) {
-//        this.order = order;
-//    }
-//
-//    public List<OrderStatus> getStatusList() {
-//        return statusList;
-//    }
-//
-//    public void setStatusList(List<OrderStatus> statusList) {
-//        this.statusList = statusList;
-//    }
 
     @Override
     public boolean equals(Object o) {

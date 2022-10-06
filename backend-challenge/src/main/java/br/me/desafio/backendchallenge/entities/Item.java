@@ -1,12 +1,11 @@
 package br.me.desafio.backendchallenge.entities;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonProperty;
 
 import javax.persistence.*;
 import java.io.Serializable;
-import java.util.HashSet;
 import java.util.Objects;
-import java.util.Set;
 
 @Entity
 @Table(name = "tb_item")
@@ -14,10 +13,12 @@ public class Item implements Serializable {
     private static final long serialVersionUID = 1L;
 
     @Id
+    @JsonIgnore
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     private String descricao;
     private Double precoUnitario;
+    @JsonProperty("qtd")
     private Integer quantidade;
     @JsonIgnore
     @ManyToOne
@@ -33,6 +34,10 @@ public class Item implements Serializable {
         this.precoUnitario = precoUnitario;
         this.quantidade = quantidade;
         this.order = order;
+    }
+
+    public double getSubtotal() {
+        return precoUnitario * quantidade;
     }
 
     public Long getId() {
