@@ -1,3 +1,4 @@
+/*
 package br.me.desafio.backendchallenge.resource.exceptions;
 
 import br.me.desafio.backendchallenge.services.exceptions.ResourceNotFoundException;
@@ -18,3 +19,4 @@ public class ResourceExceptionHandler {
         return ResponseEntity.status(status).body(err);
     }
 }
+*/

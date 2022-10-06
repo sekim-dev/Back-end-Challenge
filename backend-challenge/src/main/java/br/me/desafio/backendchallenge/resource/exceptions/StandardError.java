@@ -1,3 +1,4 @@
+/*
 package br.me.desafio.backendchallenge.resource.exceptions;
 
 import java.time.Instant;
@@ -61,3 +62,4 @@ public class StandardError {
         this.path = path;
     }
 }
+*/
