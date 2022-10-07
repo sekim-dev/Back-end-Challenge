@@ -17,12 +17,8 @@ public class Order implements Serializable {
     private String id;
 
     @OneToMany(mappedBy = "order", cascade = CascadeType.ALL, orphanRemoval = true)
-    @JsonProperty("Itens")
-    private Set<Item> items = new HashSet<>();  //Set (interface) representa um conjunto != de List. impede repetir o mesmo item.
-
-//    @OneToOne(mappedBy = "order", cascade = CascadeType.ALL, orphanRemoval = true)
-//    @JsonProperty("Status")
-//    private Status status;
+    @JsonProperty("itens")
+    private Set<Item> items = new HashSet<>();
 
     public Order(String id) {
         this.id = id;
@@ -34,7 +30,6 @@ public class Order implements Serializable {
     }
 
     public Order() {
-
     }
 
     public String getId() {
@@ -45,12 +40,17 @@ public class Order implements Serializable {
         this.id = id;
     }
 
+
     public void addItem(Item item) {
         items.add(item);
     }
 
     public void removeItem(Order item) {
         items.remove(item);
+    }
+
+    public Set<Item> getItems() {
+        return items;
     }
 
     public void setItems(Set<Item> items) {
@@ -63,10 +63,18 @@ public class Order implements Serializable {
 
     public double valorTotal() {
         double sum = 0.0;
-        for (Item i : items) {
-            sum += i.getSubtotal();
+        for (Item i : this.items) {
+            sum += i.getPrecoUnitario() * i.getQuantidade();
         }
         return sum;
+    }
+
+    public int quantidadeTotal() {
+        int qnt = 0;
+        for (Item i : this.items) {
+            qnt += i.getQuantidade();
+        }
+        return qnt;
     }
 
 

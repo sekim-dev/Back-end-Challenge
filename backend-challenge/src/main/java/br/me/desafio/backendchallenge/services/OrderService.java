@@ -39,7 +39,6 @@ public class OrderService {
 
     public Order update(String id, OrderDto dto){
         Order order = repository.getReferenceById(id);
-        //updateData(order, dto);
         order = this.addItemsToOrder(order, dto.getItems());
         return  repository.save(order);
     }
@@ -49,11 +48,18 @@ public class OrderService {
 //    }
     public Order addItemsToOrder (Order order, List<ItemDto> dto) {
         order.removeItem(order);
+        //order.getItems().clear();
         for (ItemDto i : dto) {
             Item item = new Item(null, i.getDescricao(), i.getPrecoUnitario(), i.getQuantidade(), order);
             order.addItem(item);
         }
         return order;
     }
+
+    public OrderDto create(OrderDto dto){
+        var entity = repository.save(OrderDto.parse(dto));
+        return OrderDto.parse(entity);
+    }
+
 
 }

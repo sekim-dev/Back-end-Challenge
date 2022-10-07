@@ -1,4 +1,4 @@
-package br.me.desafio.backendchallenge.entities.enuns;
+package br.me.desafio.backendchallenge.entities.enums;
 
 public enum OrderStatus {
     APROVADO("APROVADO"),

@@ -1,7 +1,9 @@
 package br.me.desafio.backendchallenge.resource;
 
 import br.me.desafio.backendchallenge.dto.OrderDto;
+import br.me.desafio.backendchallenge.dto.StatusDtoRequest;
 import br.me.desafio.backendchallenge.entities.Order;
+import br.me.desafio.backendchallenge.entities.Status;
 import br.me.desafio.backendchallenge.services.OrderService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
@@ -14,7 +16,7 @@ import java.util.List;
 
 
 @RestController
-@RequestMapping(value = "/orders")
+@RequestMapping(value = "/api/pedido")
 public class OrderResources {
     @Autowired
     private OrderService service;

@@ -1,22 +1,30 @@
 package br.me.desafio.backendchallenge.dto;
 
 import br.me.desafio.backendchallenge.entities.Status;
+import br.me.desafio.backendchallenge.entities.enums.OrderStatus;
 
 import java.util.List;
 
 
 public class StatusDtoResponse {
     private String id;
-    List<Status> status;
+    List<OrderStatus> status;
 
-    public StatusDtoResponse(String id, List<Status> status) {
+    public StatusDtoResponse(String id) {
         this.id = id;
-        this.status = status;
     }
     public String getId() {
         return id;
     }
-    public List<Status> getStatus() {
+    public List<OrderStatus> getStatus() {
         return status;
+    }
+
+    public void setId(String id) {
+        this.id = id;
+    }
+
+    public void setStatus(List<OrderStatus> status) {
+        this.status = status;
     }
 }

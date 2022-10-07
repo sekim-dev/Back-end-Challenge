@@ -2,13 +2,11 @@
 package br.me.desafio.backendchallenge.entities;
 
 
-import br.me.desafio.backendchallenge.entities.enuns.OrderStatus;
+import br.me.desafio.backendchallenge.entities.enums.OrderStatus;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
 import javax.persistence.*;
 import java.io.Serializable;
-import java.util.ArrayList;
-import java.util.List;
 import java.util.Objects;
 
 @Entity
@@ -26,8 +24,6 @@ public class Status implements Serializable {
     @OneToOne
     @JoinColumn(name = "order_id")
     private Order order;
-
-    //private List<OrderStatus> statusList;
 
     public Status(Long id, int itensAprovados, double valorAprovado, OrderStatus status) {
         this.id = id;

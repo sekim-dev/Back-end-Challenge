@@ -4,7 +4,7 @@ package br.me.desafio.backendchallenge.entities.config;
 import br.me.desafio.backendchallenge.entities.Item;
 import br.me.desafio.backendchallenge.entities.Order;
 import br.me.desafio.backendchallenge.entities.Status;
-import br.me.desafio.backendchallenge.entities.enuns.OrderStatus;
+import br.me.desafio.backendchallenge.entities.enums.OrderStatus;
 import br.me.desafio.backendchallenge.repositories.ItemRepository;
 import br.me.desafio.backendchallenge.repositories.OrderRepository;
 import br.me.desafio.backendchallenge.repositories.StatusRepository;

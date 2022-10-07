@@ -35,10 +35,10 @@ public class Item implements Serializable {
         this.quantidade = quantidade;
         this.order = order;
     }
-
-    public double getSubtotal() {
-        return precoUnitario * quantidade;
-    }
+//
+//    public double getSubtotal() {
+//        return precoUnitario * quantidade;
+//    }
 
     public Long getId() {
         return id;

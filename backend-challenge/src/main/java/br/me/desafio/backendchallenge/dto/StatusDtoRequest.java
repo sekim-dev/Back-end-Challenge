@@ -1,6 +1,6 @@
 package br.me.desafio.backendchallenge.dto;
 
-import br.me.desafio.backendchallenge.entities.enuns.OrderStatus;
+import br.me.desafio.backendchallenge.entities.enums.OrderStatus;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
 public class StatusDtoRequest {
