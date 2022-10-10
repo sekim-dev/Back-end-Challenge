@@ -28,7 +28,7 @@ public class OrderService {
     }
     public Order insert(OrderDto dto){
         Order order = new Order(dto.getId());
-        order = this.addItemsToOrder(order, dto.getItem());
+        order = this.addItemsToOrder(order, dto.getItems());
         repository.save(order);
         return order;
     }
@@ -47,8 +47,8 @@ public class OrderService {
 //        entity.setId(obj.getId());
 //    }
     public Order addItemsToOrder (Order order, List<ItemDto> dto) {
-        order.removeItem(order);
-        //order.getItems().clear();
+        //order.removeItem(order);
+        order.getItems().clear();
         for (ItemDto i : dto) {
             Item item = new Item(null, i.getDescricao(), i.getPrecoUnitario(), i.getQuantidade(), order);
             order.addItem(item);

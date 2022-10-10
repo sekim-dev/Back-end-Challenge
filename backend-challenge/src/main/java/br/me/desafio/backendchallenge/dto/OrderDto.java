@@ -29,10 +29,6 @@ public class OrderDto {
         return id;
     }
 
-    public List<ItemDto> getItem() {
-        return items;
-    }
-
     public List<ItemDto> getItems() {
         return items;
     }
@@ -44,4 +40,5 @@ public class OrderDto {
     public void setItems(List<ItemDto> items) {
         this.items = items;
     }
+
 }
