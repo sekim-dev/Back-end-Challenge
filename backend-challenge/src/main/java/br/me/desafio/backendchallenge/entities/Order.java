@@ -70,11 +70,11 @@ public class Order implements Serializable {
     }
 
     public int quantidadeTotal() {
-        int qnt = 0;
+        int qtd = 0;
         for (Item i : this.items) {
-            qnt += i.getQuantidade();
+            qtd += i.getQuantidade();
         }
-        return qnt;
+        return qtd;
     }
 
 

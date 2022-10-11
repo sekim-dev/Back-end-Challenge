@@ -16,7 +16,7 @@ public class ItemDto {
 
     private String descricao;
     private Double precoUnitario;
-    @JsonProperty("qnt")
+    @JsonProperty("qtd")
     private Integer quantidade;
 
     public static Set<Item> parse(List<ItemDto> dtos, Order order) {
